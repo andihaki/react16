@@ -69,3 +69,35 @@ const newPerson = {
 
 jadi, newPerson sekarang punya semua object dari person. ini ga akan bisa kalau cuma:
 const newPerson = person // ini cuma copy object person dari pointer
+
+# REACT children
+<p name="test">
+    <a>url</a>
+</p>
+
+props.children = <a>url</a>
+
+#REACT pas data to function / method
+changeSome(val){
+    this.setState({ bla: val})
+}
+
+approach:
+1. <button onClick={() => this.changeSome("abcde")}></button>
+2. <button onClick={this.changeSome.bind(this, "abcde")}></button>
+
+best is number 2, because it not much re-render
+
+# REACT inline css style
+hint: replace dash with camelcase
+cons: tidak semua fungsi dari css bisa dipakai
+
+const style= {
+    backgroundColor: "white",
+    font: "inherit",
+    border: "1px solid blue",
+    padding: "8px",
+    cursor: "pointer"
+}
+
+<button style={style}>

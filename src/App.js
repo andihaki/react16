@@ -1,18 +1,93 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
 
+import Person from './Person/Person'
+
 class App extends Component {
-  render() {
+  state = {
+    persons : [
+      { id: 1, name: "separo", age: 33 },
+      { id: 2, name: "jak", age: 30 },
+    ],
+    showPersons: false,    
+  }
+
+  deletePersonsHandler = (personIndex) => {
+    // const persons = this.state.persons;
+    const persons = [...this.state.persons];
+
+    persons.splice(personIndex, 1);
+    this.setState({ persons });
+  }
+
+  nameChangeHandler = (event, id) => {
+    //cari persons dengan === id
+    const personIndex = this.state.persons.findIndex(p => {      
+      return p.id === id;
+    });
+
+    const person = {
+      ...this.state.persons[personIndex]
+    };
+        
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+
+    this.setState({
+      persons: persons
+    });
+  }
+
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({
+      showPersons: !doesShow,
+    })
+  }
+
+  render() {  
+    // css
+    const style= {
+      backgroundColor: "white",
+      font: "inherit",
+      border: "1px solid blue",
+      padding: "8px",
+      cursor: "pointer"
+    }
+
+    let persons = null;
+
+    if(this.state.showPersons){
+      persons = (
+        <div>
+          {
+            // {name, age} = desctructuring
+            // sama juga dengan person.name, person.age
+            this.state.persons.map( ({id, name, age}, index) => {
+              return <Person 
+                key={id} 
+                name={name} 
+                age={age}
+                click={this.deletePersonsHandler}
+                changed={(event) => this.nameChangeHandler(event, id)}
+              />
+            })
+          }          
+        </div> 
+      );
+    }
+
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        <h1>I'm Spartaaaa</h1>
+        <button 
+          style={style}
+          onClick={this.togglePersonsHandler}>Switch Name</button>
+        
+        {persons}
+        
       </div>
     );
   }
