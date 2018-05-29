@@ -101,3 +101,6 @@ const style= {
 }
 
 <button style={style}>
+
+# css package: radium
+supaya bisa pakai full akses ke css inline style, misal: media query, hover

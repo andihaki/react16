@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+
+
 import './App.css';
 
 import Person from './Person/Person'
@@ -50,11 +52,11 @@ class App extends Component {
   render() {  
     // css
     const style= {
-      backgroundColor: "white",
+      backgroundColor: "green",
       font: "inherit",
       border: "1px solid blue",
       padding: "8px",
-      cursor: "pointer"
+      cursor: "pointer",
     }
 
     let persons = null;
@@ -77,11 +79,23 @@ class App extends Component {
           }          
         </div> 
       );
+
+      style.backgroundColor = "red";
+      
+    }
+
+    const classes = [];
+    if (this.state.persons.length < 2){
+      classes.push("red");
+    }
+    if (this.state.persons.length < 1){
+      classes.push("italic");
     }
 
     return (
+      
       <div className="App">
-        <h1>I'm Spartaaaa</h1>
+        <h1 className={classes.join(" ")}>I'm Spartaaaa</h1>
         <button 
           style={style}
           onClick={this.togglePersonsHandler}>Switch Name</button>
@@ -89,6 +103,7 @@ class App extends Component {
         {persons}
         
       </div>
+      
     );
   }
 }
