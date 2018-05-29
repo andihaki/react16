@@ -102,5 +102,8 @@ const style= {
 
 <button style={style}>
 
-# css package: radium
-supaya bisa pakai full akses ke css inline style, misal: media query, hover
+# supaya bisa pakai full akses ke css inline style, misal: media query, pseudo selector => :hover
+
+## css package: radium
+## css-modules # lecture 67
+kalau pingin pakai global, di css add :global .nama-class {}
