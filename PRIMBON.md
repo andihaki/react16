@@ -129,3 +129,26 @@ https://medium.com/nulogy/how-to-use-css-modules-with-create-react-app-9e44bec2b
 3. render()
 3. 3a Render child components
 4. componentDidMount()
+
+## update (triggered by parent)
+1. componentWillReceiveProps(nextProps)
+    sync state to props. casenya: kalau ada props yang dateng, bisa buat update "state", 
+    tapi bagusan udpate statenya di "componentWillUpdate()"
+2. shouldComponentUpdate(nextProps, nextState)
+    mau di update ga child component? = true / false
+    bisa berhentiin re-render, kalau = false
+3. componentWillUpdate(nextProps, nextState)
+    sync state to props
+4. render()
+5. componentDidUpdate()
+
+## update (triggered by internal change (state))
+1. shouldComponentUpdate(nextProps, nextState)
+2. componentWillUpdate(nextProps, nextState)
+3. render()
+3. 3a. update child component props
+4. componentDidUpdate()
+
+# { Component } is so old
+instead used { PureComponent }, soalnya dia bakal ngecek ototmatis tanpa perlu
+capek-capek check nextProps / nextState di shouldComponentUpdate

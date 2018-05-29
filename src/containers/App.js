@@ -1,18 +1,52 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 
 import css from './App.css';
 
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
 
-class App extends Component {
-  state = {
-    persons : [
-      { id: 1, name: "separo", age: 33 },
-      { id: 2, name: "jak", age: 30 },
-    ],
-    showPersons: false,    
+class App extends PureComponent {
+  constructor(props){
+    super(props);
+    console.log('constructor app', props);
+    this.state = {
+      persons : [
+        { id: 1, name: "separo", age: 33 },
+        { id: 2, name: "jak", age: 30 },
+      ],
+      showPersons: false,    
+    }
   }
+
+  componentWillMount(){
+    console.log('componentWillMount');
+  }
+
+  componentDidMount(){
+    console.log('componentDidMount');
+  }
+
+  // shouldComponentUpdate(nextProps, nextState){
+  //   console.log('shouldComponentUpdate', nextProps, nextState);
+  //   return nextState.persons !== this.state.persons
+  //     || nextState.showPersons !== this.state.persons;
+  // }
+
+componentWillUpdate(nextProps, nextState){
+    console.log('componentWillUpdate', nextProps, nextState);        
+}
+
+componentDidUpdate(){
+    console.log('componentDidUpdate');        
+}
+  
+  // state = {
+  //   persons : [
+  //     { id: 1, name: "separo", age: 33 },
+  //     { id: 2, name: "jak", age: 30 },
+  //   ],
+  //   showPersons: false,    
+  // }
 
   deletePersonsHandler = (personIndex) => {
     // const persons = this.state.persons;
@@ -50,6 +84,7 @@ class App extends Component {
   }
 
   render() {    
+    console.log('render persons');
     let persons = null;
     
 
@@ -67,9 +102,9 @@ class App extends Component {
       
     }    
 
-    return (
-      
+    return (      
       <div className={css.App}>
+      <button onClick={() => {this.setState({showPersons: true})}}>show persons</button>
         <Cockpit 
           appTitle={this.props.title}
           showPersons={this.state.showPersons}
