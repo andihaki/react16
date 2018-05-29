@@ -105,5 +105,27 @@ const style= {
 # supaya bisa pakai full akses ke css inline style, misal: media query, pseudo selector => :hover
 
 ## css package: radium
+
 ## css-modules # lecture 67
 kalau pingin pakai global, di css add :global .nama-class {}
+https://medium.com/nulogy/how-to-use-css-modules-with-create-react-app-9e44bec2b5c2
+
+# component
+## statless
+    it's dumb / presentation component
+    only props
+    not have lifecycle
+
+## stateful
+    it's smart component 
+    props + state
+    have lifecycle
+
+# lifecycle
+## first creation / render
+1. constructor(props) // default ES6 class
+    perlu panggil __super(props)__
+2. componentWillMount()
+3. render()
+3. 3a Render child components
+4. componentDidMount()
