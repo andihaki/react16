@@ -150,5 +150,5 @@ https://medium.com/nulogy/how-to-use-css-modules-with-create-react-app-9e44bec2b
 4. componentDidUpdate()
 
 # { Component } is so old
-instead used { PureComponent }, soalnya dia bakal ngecek ototmatis tanpa perlu
-capek-capek check nextProps / nextState di shouldComponentUpdate
+instead used { PureComponent }, soalnya dia bakal ngecek ototmatis perlu ga sih re-render?
+tanpa perlu capek-capek check nextProps / nextState di shouldComponentUpdate

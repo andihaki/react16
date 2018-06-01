@@ -4,6 +4,8 @@ import css from './App.css';
 
 import Persons from '../components/Persons/Persons';
 import Cockpit from '../components/Cockpit/Cockpit';
+import Aux from '../hoc/Aux';
+import withClassName from '../hoc/withClassName';
 
 class App extends PureComponent {
   constructor(props){
@@ -15,6 +17,7 @@ class App extends PureComponent {
         { id: 2, name: "jak", age: 30 },
       ],
       showPersons: false,    
+      toggleClick: 0,
     }
   }
 
@@ -78,8 +81,12 @@ componentDidUpdate(){
 
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
-    this.setState({
-      showPersons: !doesShow,
+    // prevState dipake, supaya hanya di class ini bisa mutate (ubah) nilai dari toggleClick
+    this.setState( (prevState, props) => {
+      return {
+        showPersons: !doesShow,
+        toggleClick: prevState.toggleClick + 1,
+      }
     })
   }
 
@@ -102,21 +109,19 @@ componentDidUpdate(){
       
     }    
 
-    return (      
-      <div className={css.App}>
-      <button onClick={() => {this.setState({showPersons: true})}}>show persons</button>
+    return (
+      <Aux>
+        <button onClick={() => {this.setState({showPersons: true})}}>show persons</button>
         <Cockpit 
           appTitle={this.props.title}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
           clicked={this.togglePersonsHandler}
         />
-        {persons}
-        
-      </div>
-      
+        {persons}        
+      </Aux>      
     );
   }
 }
 
-export default App;
+export default withClassName(App, css.App);
