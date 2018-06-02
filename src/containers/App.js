@@ -7,6 +7,8 @@ import Cockpit from '../components/Cockpit/Cockpit';
 import Aux from '../hoc/Aux';
 import withClassName from '../hoc/withClassName';
 
+export const AuthContext = React.createContext(false);
+
 class App extends PureComponent {
   constructor(props){
     super(props);
@@ -18,6 +20,7 @@ class App extends PureComponent {
       ],
       showPersons: false,    
       toggleClick: 0,
+      authenticated: false,
     }
   }
 
@@ -82,12 +85,17 @@ componentDidUpdate(){
   togglePersonsHandler = () => {
     const doesShow = this.state.showPersons;
     // prevState dipake, supaya hanya di class ini bisa mutate (ubah) nilai dari toggleClick
+    // karena setState berjalan async
     this.setState( (prevState, props) => {
       return {
         showPersons: !doesShow,
         toggleClick: prevState.toggleClick + 1,
       }
     })
+  }
+
+  loginHandler = () => {
+    this.setState({ authenticated: true })
   }
 
   render() {    
@@ -116,9 +124,14 @@ componentDidUpdate(){
           appTitle={this.props.title}
           showPersons={this.state.showPersons}
           persons={this.state.persons}
+          login={this.loginHandler}
           clicked={this.togglePersonsHandler}
         />
-        {persons}        
+        <AuthContext.Provider
+          value={this.state.authenticated}
+        >
+          {persons}        
+        </AuthContext.Provider>
       </Aux>      
     );
   }
