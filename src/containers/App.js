@@ -38,13 +38,23 @@ class App extends PureComponent {
   //     || nextState.showPersons !== this.state.persons;
   // }
 
-componentWillUpdate(nextProps, nextState){
-    console.log('componentWillUpdate', nextProps, nextState);        
-}
+  componentWillUpdate(nextProps, nextState){
+      console.log('componentWillUpdate', nextProps, nextState);        
+  }
 
-componentDidUpdate(){
-    console.log('componentDidUpdate');        
-}
+  static getDerivedStateFromProps(nextProps, prevState) {
+    console.log('getDerivedStateFromProps', nextProps, prevState);
+    
+    return prevState;
+  }
+
+  getSnapshotBeforeUpdate(){
+    console.log('getSnapshotBeforeUpdate');
+  }
+
+  componentDidUpdate(){
+      console.log('componentDidUpdate');        
+  }
   
   // state = {
   //   persons : [

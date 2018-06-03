@@ -157,3 +157,8 @@ tanpa perlu capek-capek check nextProps / nextState di shouldComponentUpdate
 // jagain data type setiap props konsisten
 yarn add save prop-types
 
+# react 16 new lyfecycle
+- getDerivedStateFromProps
+    static getDerivedStateFromProps(nextProps, prevState) {return prevState}
+    dijalankan setelah constructor, sebelum render
+- 
